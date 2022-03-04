@@ -4,8 +4,13 @@
         "text": "Test text"
     },
     {
-        "title": "test",
-        "text": "test",
-        "id": "8a0165b5-a9bd-41b1-9423-95e463736e3e"
+        "title": "Note A",
+        "text": "Apple.",
+        "id": "69d51642-6c88-4383-a903-c48342be3aaa"
+    },
+    {
+        "title": "Note B",
+        "text": "Banana",
+        "id": "c4f7762f-9841-45ee-9520-6c422a51b92a"
     }
 ]
