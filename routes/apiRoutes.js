@@ -1,14 +1,14 @@
 const api = require("express").Router();
-// const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require("uuid");
 const { readAndAppend, readFromFile } = require("../helpers/fsHelp");
 
 // GET Route for retrieving all the feedback
-api.get("/api/notes", (req, res) =>
-  readFromFile("../db/db.json").then((data) => res.json(JSON.parse(data)))
+api.get("/notes", (req, res) =>
+  readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)))
 );
 
 // POST Route for submitting feedback
-api.post("/api/notes", (req, res) => {
+api.post("/notes", (req, res) => {
   // Destructuring assignment for the items in req.body
   const { title, text } = req.body;
 
@@ -21,7 +21,7 @@ api.post("/api/notes", (req, res) => {
       id: uuidv4(),
     };
 
-    readAndAppend(makeNote, "../db/db.json");
+    readAndAppend(makeNote, "./db/db.json");
 
     const response = {
       status: "success",
@@ -33,4 +33,5 @@ api.post("/api/notes", (req, res) => {
     res.json("Error saving note");
   }
 });
+
 module.exports = api;
