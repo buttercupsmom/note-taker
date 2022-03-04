@@ -1,6 +1,10 @@
 const api = require("express").Router();
 const { v4: uuidv4 } = require("uuid");
-const { readAndAppend, readFromFile } = require("../helpers/fsHelp");
+const {
+  readAndAppend,
+  readFromFile,
+  writeToFile,
+} = require("../helpers/fsHelp");
 
 // GET Route for retrieving all the feedback
 api.get("/notes", (req, res) =>
@@ -32,6 +36,20 @@ api.post("/notes", (req, res) => {
   } else {
     res.json("Error saving note");
   }
+});
+
+// delete
+api.delete("/notes/:id", (req, res) => {
+  const notesId = req.params.id;
+  readFromFile("./db/db.json")
+    .then((data) => JSON.parse(data))
+    .then((json) => {
+      const answers = json.filter((note) => note.id !== notesId);
+
+      writeToFile("./db/db.json", answers);
+
+      res.json(`${notesId} deleted.`);
+    });
 });
 
 module.exports = api;
