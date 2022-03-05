@@ -1,7 +1,7 @@
 const express = require("express");
 // calling the index and notes html
 const htmlRoutes = require("./routes/htmlRoutes");
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const apiRoutes = require("./routes/apiRoutes");
 
 const app = express();
